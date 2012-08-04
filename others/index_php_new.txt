@@ -1,0 +1,26 @@
+<?php
+define( 'WP_USE_THEMES', true );
+
+define( 'SP_ABSPATH', dirname(__FILE__).DIRECTORY_SEPARATOR );
+define( 'SP_PLUGIN_ROOT', dirname(__FILE__).DIRECTORY_SEPARATOR.
+                          '%%%THERE-MUST-BE-PLUGIN-DIRECTORY%%%');
+
+require_once SP_PLUGIN_ROOT.'classes/spClasses.php';
+
+if( 'wp-comments-post.php' == substr( $_SERVER["REQUEST_URI"], -20 ) ){
+    spClasses::get('Antispam');
+    require 'wp-comments-post.php';
+    exit;
+}
+
+$spCache =  spClasses::get('Cache');
+$spRedirs = spClasses::get('Redirs');
+$spStats =  spClasses::get('Stats');
+
+if( $spRedirs->shouldBeApplied() ) $spRedirs->redirect();
+
+$spCache->showCachedVersionIfPossible();
+
+$spCache->preCacheByBuffer();
+require('./wp-blog-header.php');
+$spCache->doStuffWtithBuffer( );

@@ -1,0 +1,1 @@
+1 -> %anything%/nofollow -> 301 -> %anything%/
