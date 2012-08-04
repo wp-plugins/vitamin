@@ -3,8 +3,8 @@ Contributors: SEO Peter
 Donate link: http://vitamin.seopeter.com/donate/
 Tags: seo, sitemap.xml, advanced cache, cache, cacheing, caching, speed, comments, spam, hackers, protected login
 Requires at least: 3.0.0
-Tested up to: 3.0.0
-Stable tag: 1.0
+Tested up to: 3.4.1
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,10 +33,22 @@ which want to hack your site.
 Inappropriate words, comments where are 1000 letters in one word and other
 trolls comments are blocked.
 
+Please, see [Vitamin manual section](http://vitamin.seopeter.com/manual/ "Vitamin manual section")
+to set everything right.
+
 == Installation ==
 
 Please, before installation remove and uninstall any existing cache or sitemaps
-plugins. You have 2 options how to install vitamin – by WordPress file upload or by FTP:
+plugins. You have 3 options how to install Vitamin:
+
+= Instalation in WordPress admin section =
+
+1. Log into administration section of your WP site.
+1. Go to **Plugins > Add New** in WordPress admin menu.
+1. Type in "Vitamin" within the search box then click "Search Plugins".
+1. Locate "Vitamin" then click on "Install Now".
+1. Click on **Activate plugin**
+1. Now you are in plugin list. Find Vitamin and click in inline menu on **Install**
 
 = WordPress File upload =
 
