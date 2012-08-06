@@ -9,6 +9,11 @@ $gzip = $_GET['gzip'];
 $exp  = $_GET['exp'];
 $path = $_GET['path'];
 
+if( FALSE !== strpos($path, "../") ){ die("There are forbidden substrings in file path"); }
+if( $ext != substr($path, - strlen($ext)) ) { die("Extension does not fit with extension in filename"); }
+if( 'php' == strtolower($ext) ) { die("Adding headers to php files is forbidden"); }
+if( 'phtml' == strtolower($ext) ) { die("Adding headers to phtml files is forbidden"); }
+
 define('SP_ABSPATH', dirname(dirname(dirname(dirname(__FILE__)))) );
 
 $path = 'wp-content'.DIRECTORY_SEPARATOR.$path;
