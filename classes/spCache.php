@@ -144,15 +144,6 @@ class spCache {
         exit;
     }
     
-    public function deleteCache(){
-        if( $dir = @dir( $this->cacheDir ) ) {
-            while (($file = $dir->read()) !== false) {
-                $file = $this->cacheDir.$file;
-                if( is_file($file) ) unlink($file);
-            }
-        }
-    }
-
     public function deleteAllInCache($dir = null){
 
         $all_ok = TRUE;
@@ -161,20 +152,23 @@ class spCache {
             $dir = $this->cacheDir;
         }
 
-        $d = dir( $dir );
-        while (false !== ($entry = $d->read())) {
-            if( '.' == $entry ) continue;
-            if( '..' == $entry ) continue;
-            if( is_dir( $dir . $entry ) ){
-                $all_ok = $all_ok AND $this->deleteAllInCache( $dir . $entry . '/' );
-                $all_ok = $all_ok AND @rmdir( $dir . $entry . '/' );
-            }else{
-                $all_ok = $all_ok AND @unlink( $dir . $entry );
+        if( $d = dir( $dir ) ){
+            while (false !== ($entry = $d->read())) {
+                if( '.' == $entry ) continue;
+                if( '..' == $entry ) continue;
+                if( is_dir( $dir . $entry ) ){
+                    $all_ok = $all_ok AND $this->deleteAllInCache( $dir . $entry . '/' );
+                    $all_ok = $all_ok AND @rmdir( $dir . $entry . '/' );
+                }else{
+                    $all_ok = $all_ok AND @unlink( $dir . $entry );
+                }
             }
-        }
 
-        $d->close();
-        return $all_ok;
+            $d->close();
+            return $all_ok;
+        }else{
+            return FALSE;
+        }
     }
 
     public function deleteCacheFile(){

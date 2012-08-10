@@ -4,7 +4,7 @@ Donate link: http://vitamin.seopeter.com/donate/
 Tags: seo, sitemap.xml, advanced cache, cache, cacheing, caching, speed, comments, spam, hackers, protected login
 Requires at least: 3.0.0
 Tested up to: 3.4.1
-Stable tag: 1.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,8 +76,15 @@ No, Vitamin v1.0 does not support multisites.
 
 == Changelog ==
 
-= 1.0 =
-* Vitamin plugin released
+= 1.2.0 =
+* Added option to ignore Vitamin sitemap part, if user has his own plugin for that. (thanks to Ramón J González)
+* Repaired Add or Replace in sitemaps, RFI blocks and Redirects sections
+* Fast 404 Mode enabled only for directory /wp-content/ to remove bug with robots.txt
+* Minor security issues fixed
+* Removed default settings, that should rewrite user settings
 
-= 1.1 =
-* Big security issue fixed
+= 1.1.0 =
+* Big security issue fixed (thanks Julio POTIER from BLOG.boiteaweb.fr)
+
+= 1.0.0 =
+* Vitamin plugin released

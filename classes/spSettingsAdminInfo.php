@@ -10,6 +10,15 @@ $spSettingsAdminInfo = array(
         'option' => array(0 => 'Leave it', 1=> 'Write it'),
     ),
 
+    'sp_sitemaps_enabled' => (object) array(
+        'title' => 'Sitemaps and robots',
+        'description' => 'If you have your another sitemap plugin and you don\'t want to use Vitamin sitemaps part, choose Off.',
+        'option'=>array(
+              0=>'Off - do not use Vitamin sitemaps part',
+              1=>'On',
+        ),
+    ),
+
     'sp_file_robots_txt' => (object) array(
         'title' => 'File robots.txt',
         'description' => 'Minimal recomended settings is:<br />'.
@@ -21,8 +30,9 @@ $spSettingsAdminInfo = array(
 
     'sp_file_root_sitemap_xml' => (object) array(
         'title' => 'Root index sitemap file sitemap.xml',
-        'description' => 'You may insert in your root index sitemap even RSS and Atom publishing protocol.',
-        'option' => array(0 => 'Leave it', 1=> 'Write it'),
+        'description' => 'Do not put there file path. There should be sitemap xml code. You may insert in your root '.
+                         '<a href="http://support.google.com/webmasters/bin/answer.py?answer=71453">index sitemap</a> even RSS and Atom publishing protocol.',
+        'option' => array(0 => 'Leave it', 1=> 'Write whole sitemap XML code'),
     ),
 
     'sp_add_rss_to_robots_sitemap' => (object) array(
@@ -116,6 +126,8 @@ $spSettingsAdminInfo = array(
         'title' => 'Enable Fast 404 for files',
         'description' => 'Whole Wordpress (MySQL database and PHP scripts) is reloaded for every missing file such as image, javascript or css.
                           You may disable it by options above. User will see just simple html, not whole Wordpress.
+                          <br /><br />
+                          Please note, that fast 404 mode is ONLY for all files in /wp-content/ directory and subdirectories!
                           <br /><br />
                           Everything will be also saved in <a href="admin.php?page=sp_seo&subpage=404">404 list</a>.',
     ),

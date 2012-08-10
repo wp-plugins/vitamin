@@ -1,22 +1,29 @@
-<?php if(empty($form_submit_path)) exit; ?>
+<?php
+
+class blocksEditForm{
+  function __construct($data, $form_submit_path, $key){
+
+?>
 <div id="dashboard-widgets-wrap">
   <div id="dashboard-widgets" class="metabox-holder">
     <div class="postbox-container" style="width:50%;"><div class="meta-box-sortables ui-sortable" style="min-height: 50px;">
 
-      <form action="<?php echo $form_submit_path; ?>" method="post">
+      <form action="<?php echo $form_submit_path; ?>&amp;keyToUpdate=<?php echo $key; ?>" method="post">
 
         <div class="postbox">
-          <h3 style="cursor:text"><?php echo ( empty($_GET['key']) ) ? 'Add' : 'Replace' ?> RFI Attack Block</h3>
+          <h3 style="cursor:text"><?php echo empty($key) ? 'Add' : 'Replace'; ?> RFI Attack Block</h3>
           <div class="inside">
 
             <table style="width:100%">
                 <tr>
                     <td><label for="orgUrl">URL to File:</label></td>
-                    <td><input type="text" id="orgUrl" name="orgUrl" value="<?php echo $data->orgUrl; ?>" style="width:100%" /></td>
+                    <td><input type="text" id="orgUrl" name="orgUrl" value="<?php echo esc_attr($data->orgUrl); ?>" style="width:100%" /></td>
                 </tr>
             </table>
             <p style="text-align:right">
-                <input type="submit" value="Add Or Replace" title="Add Or Replace" class="button-primary" />
+                    <input type="submit" value="<?php echo empty($key) ? 'Add' : 'Replace';
+                    ?>" title="<?php echo empty($key) ? 'Add' : 'Replace';
+                    ?>" class="button-primary" />
             </p>
             <div class="clear"></div>
           </div>
@@ -53,3 +60,7 @@
     </div>
   </div>
 </div>
+<?php
+  }
+}
+

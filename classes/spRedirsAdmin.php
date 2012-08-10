@@ -96,7 +96,11 @@ class spRedirsAdmin extends spRedirs {
             );
         }
         $form_submit_path = $this->dataList->PageSubpageFilterUrl;
+
+        global $_GET;
+        $key = empty($_GET['key']) ? null : $_GET['key'];
         require 'forms/redirsEditForm.php';
+        new redirsEditForm($data, $form_submit_path, $key);
     }
 
     function printList(){

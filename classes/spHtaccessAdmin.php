@@ -307,6 +307,10 @@ class spHtaccessAdmin{
     }
 
     function htaccess_Sitemaps(){
+        if( empty( $this->settings->sitemaps_enabled ) ){
+            return "\n### Sitemaps and robots DISABLED\n";
+        }
+
         return
             "\n### Redirect to sitemaps and robots\n".
 
@@ -333,7 +337,7 @@ class spHtaccessAdmin{
             $ext = implode("|\\.",$this->settings->fast404);
 
             $ret.= "RewriteCond %{REQUEST_FILENAME} !-f\n";
-            $ret.= "RewriteCond %{REQUEST_URI} ^(.*)(\.$ext)$ [NC]\n";
+            $ret.= "RewriteCond %{REQUEST_URI} ^(.*)/wp-content/(.*)(\.$ext)$ [NC]\n";
             $ret.= "RewriteRule ^(.*) $this->pluginRoot"."fast404.php [L]\n";
             $ret.= "\n";
             return $ret;

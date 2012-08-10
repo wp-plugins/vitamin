@@ -132,6 +132,14 @@ class spSitemapsAdmin extends spSitemaps {
     }
     
     function printAdminPage(){
+        $settings = spClasses::get('Settings');
+        
+        if( empty( $settings->sitemaps_enabled ) ){
+            echo "<p>Sitemaps disabled.</p>";
+            echo "<p>To enable sitemaps go to <a href='./admin.php?page=sp_seo&amp;subpage=files'>WP admin menu &gt; Vitamin &gt; SEO &gt; SEO Files</a> and change 'Sitemaps and robots:' to option 'on'.</p>";
+            return;
+        }
+
         global $_GET;
 
         $this->dataList->printErrors();
@@ -174,6 +182,7 @@ class spSitemapsAdmin extends spSitemaps {
                                 '0' :
                                 implode('|', $d_POST['limitation']);
 
+        global $_GET;
         if( !empty( $_GET['keyToUpdate'] ) and !empty( $this->dataList->data[ $_GET['keyToUpdate'] ] ) ){
             unset( $this->dataList->data[ $_GET['keyToUpdate'] ] );
         }
@@ -185,7 +194,17 @@ class spSitemapsAdmin extends spSitemaps {
                   'limitation' => $d_POST['limitation']
         );
 
-        $this->dataList->saveAll($fp);
+        if( $this->dataList->saveAll($fp)){
+            global $_GET;
+            if( !empty( $_GET['keyToUpdate'] ) ){
+                $this->dataList->info[] = "Item <code>".htmlentities($d_POST['sitemap_title'])."</code> was updated";
+            }else{
+                $this->dataList->info[] = "Item <code>".htmlentities($d_POST['sitemap_title'])."</code> was added";
+            }
+        }else{
+            $this->dataList->error[] = "Unable to add <code>".htmlentities($d_POST['sitemap_title'])."</code> item";
+        }
+
     }
 
     function printEditForm($key){
@@ -203,7 +222,11 @@ class spSitemapsAdmin extends spSitemaps {
         }
 
         $form_submit_path = $this->dataList->PageSubpageFilterUrl;
+
+        global $_GET;
+        $key = empty($_GET['key']) ? null : $_GET['key'];
         require 'forms/sitemapsEditForm.php';
+        new sitemapsEditForm($data, $form_submit_path, $key, $this->postTypesTaxonomies, $this->containsTypes);
     }
 
     function printList(){

@@ -1,3 +1,0 @@
-normal -> taxonomies -> tax_all -> 0
-normal -> post-and-pages -> post_all -> 0
-image -> images -> post_all -> 0

@@ -1,4 +1,9 @@
-<?php if(empty($data)) exit; ?>
+<?php
+
+class sitemapsEditForm{
+  function __construct($data, $form_submit_path, $key, $postTypesTaxonomies, $containsTypes){
+  ?>
+  
 <div id="dashboard-widgets-wrap">
   <div id="dashboard-widgets" class="metabox-holder">
 
@@ -8,7 +13,7 @@
         <form action="<?php echo $form_submit_path; ?>&amp;keyToUpdate=<?php echo $key; ?>" method="post">
 
           <div class="postbox">
-            <h3 style="cursor:text"><?php echo ( empty($_GET['key']) ) ? 'Add' : 'Replace' ?>  Sitemap</h3>
+            <h3 style="cursor:text"><?php echo empty($key) ? 'Add' : 'Replace' ?>  Sitemap</h3>
             <div class="inside">
 
                 <table style="width:100%">
@@ -33,12 +38,12 @@
                         <td>
                             <select id="contains" name="contains">
                               <?php
-                                foreach ($this->containsTypes as $key=>$value) {
-                                    echo "<option value=$key";
-                                    if( 'tax_' == substr($key,0,4) ) echo " class=taxonomy";
-                                    if($key == $data->contains) echo ' selected=selected';
+                                foreach ($containsTypes as $k=>$value) {
+                                    echo "<option value=$k";
+                                    if( 'tax_' == substr($k,0,4) ) echo " class=taxonomy";
+                                    if($k == $data->contains) echo ' selected=selected';
                                     echo ">";
-                                    if( ( 'tax_all' != $key ) and ( 'post_all' != $key ) ){
+                                    if( ( 'tax_all' != $k ) and ( 'post_all' != $k ) ){
                                         echo ' &nbsp; ';
                                     }
                                     echo "$value</option>";
@@ -54,7 +59,7 @@
                             echo '<label><input type=checkbox name=limitation[] value=0 id=no_limitation ';
                             if( FALSE !== strpos( '|'.$data->limitation.'|', '|0|' ) ) echo ' checked=checked';
                             echo ' /> No limitation</label>';
-                            foreach ($this->postTypesTaxonomies as $postType=>$postData) {
+                            foreach ($postTypesTaxonomies as $postType=>$postData) {
                                 if( $postData ){
                                     echo "<div class='$postType'>";
                                     foreach ($postData as $taxSlug=>$taxData) {
@@ -132,7 +137,7 @@
                                     }
                                 });
                             });
-                            
+
                             function on_type_change(){
                                 if( 'image' == jQuery('#type').val() ){
                                     jQuery('#contains .taxonomy').attr('disabled','disabled');
@@ -160,7 +165,9 @@
                     </tr>
                 </table>
                 <p style="text-align:right">
-                    <input type="submit" value="Add Or Replace" title="Add Or Replace" class="button-primary" />
+                    <input type="submit" value="<?php echo empty($key) ? 'Add' : 'Replace'
+                    ?>" title="<?php echo empty($key) ? 'Add' : 'Replace'
+                    ?>" class="button-primary" />
                 </p>
                 <div class="clear"></div>
             </div>
@@ -220,3 +227,7 @@
 
   </div>
 </div>
+<?php
+  }
+}
+

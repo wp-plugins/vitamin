@@ -68,6 +68,10 @@ class spInstallAdmin extends spBoard {
         $this->checkBlockedPages();
         $this->afterBox();
 
+        $this->beforeBox('File with Sitemap List');
+        $this->checkSitemapList();
+        $this->afterBox();
+
         require_once 'spHooksAdmin.php';
         $adminHooks = new spHooksAdmin();
         $adminHooks->add('deleteCache');
@@ -303,5 +307,20 @@ class spInstallAdmin extends spBoard {
         }else{
             echo '<p class=ok>There is a few possible but blocked bad url addresses.</p>';
         }
+    }
+    
+    function checkSitemapList(){
+        if( 0 == filesize( SP_PLUGIN_ROOT.'others'.DIRECTORY_SEPARATOR.'sitemaps.txt' ) ){
+            $sitemaps = array();
+            file_put_contents(SP_PLUGIN_ROOT.'others'.DIRECTORY_SEPARATOR.'sitemaps.txt',
+                "normal -> taxonomies -> tax_all -> 0\n".
+                "normal -> post-and-pages -> post_all -> 0\n".
+                "image -> images -> post_all -> 0"
+            );
+            echo '<p class=ok>Adding default sitemaps.</p>';
+        }else{
+            echo '<p class=ok>There are a few sitemaps.</p>';
+        }
+
     }
 }

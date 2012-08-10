@@ -90,17 +90,24 @@ class spBlocksAdmin {
             }
         }
 
+        global $_GET;
         if( !empty( $_GET['keyToUpdate'] ) and !empty( $this->dataList->data[ $_GET['keyToUpdate'] ] ) ){
             unset( $this->dataList->data[ $_GET['keyToUpdate'] ] );
         }
 
         $this->dataList->data[ md5( $d_POST['orgUrl'] ) ] = (object) array( 'orgUrl' => $d_POST['orgUrl'] );
-        
+
         if( $this->dataList->saveAll($fp)){
-            $this->dataList->info[] = "Item <code>".htmlentities($d_POST['orgUrl'])."</code> was added";
+            global $_GET;
+            if( !empty( $_GET['keyToUpdate'] ) ){
+                $this->dataList->info[] = "Item <code>".htmlentities($d_POST['orgUrl'])."</code> was updated";
+            }else{
+                $this->dataList->info[] = "Item <code>".htmlentities($d_POST['orgUrl'])."</code> was added";
+            }
         }else{
             $this->dataList->error[] = "Unable to add <code>".htmlentities($d_POST['orgUrl'])."</code> item";
         }
+
     }
 
     function printEditForm($key, $url=null ){
@@ -112,7 +119,11 @@ class spBlocksAdmin {
             );
         }
         $form_submit_path = $this->dataList->PageSubpageFilterUrl;
+
+        global $_GET;
+        $key = empty($_GET['key']) ? null : $_GET['key'];
         require 'forms/blocksEditForm.php';
+        new blocksEditForm($data, $form_submit_path, $key);
     }
 
     function printList(){

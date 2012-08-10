@@ -70,10 +70,9 @@ class spStatsAdmin extends spStats {
             echo "<p class=ok>Data count on graph was aproximated by PHP Cache mode stats.</p>";
         }
 
-        echo "<p>A web cache is a mechanism for the temporary storage (caching) of web documents, such as HTML pages and images, to reduce bandwidth usage, server load, and perceived lag. </p>";
-        echo "<p>When your visitor open a page, this page is sended to him. But there is also created a copy of it on your server if it not exists. That is Cache Miss.</p>";
-        echo "<p>But when second visitor open same page, saved copy is sended. This will save a lot of server resources and it is more faster. That is Cache Hit.</p>";
-
+        echo "<p>Server cache is a mechanism for the temporary storage (caching) of HTML pages, to reduce server load and reduce loading lag.</p>";
+        echo "<p>When somebody opens your page, that page is sent to him, but there is also created a copy of it. This is called a cache miss.</p>";
+        echo "<p>When second visitor opens the same page, the saved copy is sent to him without slow rebuilding. This is called a cache hit.</p>";
         ?>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
@@ -84,7 +83,7 @@ class spStatsAdmin extends spStats {
           data.addColumn('string', 'State');
           data.addColumn('number', 'Count');
           data.addRows([
-            ['Cache hits', <?php echo $hits; ?> ],
+            ['Cache hit', <?php echo $hits; ?> ],
             ['Cache miss', <?php echo $miss; ?> ]
           ]);
           var options = {

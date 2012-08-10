@@ -107,6 +107,7 @@ class spRedirs {
             }
         }
 
+        global $_GET;
         if( !empty( $_GET['keyToUpdate'] ) and !empty( $this->dataList->data[ $_GET['keyToUpdate'] ] ) ){
             unset( $this->dataList->data[ $_GET['keyToUpdate'] ] );
         }
@@ -119,7 +120,12 @@ class spRedirs {
         );
 
         if( $this->dataList->saveAll($fp)){
-            $this->dataList->info[] = "Item <code>".htmlentities($d_POST['orgUrl'])."</code> was added";
+            global $_GET;
+            if( !empty( $_GET['keyToUpdate'] ) ){
+                $this->dataList->info[] = "Item <code>".htmlentities($d_POST['orgUrl'])."</code> was updated";
+            }else{
+                $this->dataList->info[] = "Item <code>".htmlentities($d_POST['orgUrl'])."</code> was added";
+            }
         }else{
             $this->dataList->error[] = "Unable to add <code>".htmlentities($d_POST['orgUrl'])."</code> item";
         }

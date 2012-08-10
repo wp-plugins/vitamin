@@ -59,6 +59,12 @@ class spHooksAdmin extends spHooks {
                     }
                     break;
                 case 'updateSitemaps':
+                    $settings = spClasses::get('Settings');
+
+                    if( empty( $settings->sitemaps_enabled ) ){
+                        break;
+                    }
+
                     $_sp_Sitemaps = spClasses::get('Sitemaps');
                     $_sp_Sitemaps->refreshAll();
                     if( !empty( $_sp_Sitemaps->error ) ){

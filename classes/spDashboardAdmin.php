@@ -33,19 +33,6 @@ class spDashboardAdmin extends spBoard {
 
         $this->beforeBox('Hacker RFI Attacks');
         echo "<p><span class=ok>Hacker RFI Attacks blocked: ".$stats->statsData[403].".</span></p>";
-        /*
-        if( ! empty( $blocks->dataList->data ) ){
-            echo "<pre>";
-            foreach ($blocks->dataList->data as $md5uri=>$value) {
-                $orgUrl_Nice = $value->orgUrl;
-                $orgUrl_Nice = htmlentities($orgUrl_Nice);
-                $orgUrl_Nice = str_replace('/','<strong style="color:#000;padding:0 2px">/</strong>',$orgUrl_Nice);
-                $orgUrl_Nice = str_replace('%anything%','<span style="color:#AAA">%anything%</span>',$orgUrl_Nice);
-                echo $orgUrl_Nice."\n";
-            }
-            echo "</pre>";
-        }
-        */
         echo '<p style="text-align:right">';
         echo '<a href="./admin.php?page=sp_security&amp;subpage=blocked" class="button-primary">View blocked attempts</a>';
         echo ' &nbsp; ';

@@ -48,8 +48,10 @@ class spDataMenu{
 								'class' => 'SettingsAdmin',
 								'method' => 'printAdminPage',
 								'data' => array(
-									array('title', 'Main SEO files editing' ),
+									array('title', '.htaccess' ),
 									array('file', 'sp_file_edit_htaccess' ),
+									array('title', 'Sitemaps and robots.txt' ),
+									array('option', 'sp_sitemaps_enabled' ),
 									array('file', 'sp_file_robots_txt' ),
 									array('file', 'sp_file_root_sitemap_xml' ),
 									array('title', 'Feeds to index sitemap.xml and to robots.txt' ),

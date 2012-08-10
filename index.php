@@ -3,7 +3,7 @@
 Plugin Name: Vitamin
 Plugin URI: http://vitamin.seopeter.com/
 Description: This all is about SEO, Speed and Security.
-Version: 1.1.0
+Version: 1.2.0
 Author: SEO Peter
 Author URI: http://seopeter.com/
 */

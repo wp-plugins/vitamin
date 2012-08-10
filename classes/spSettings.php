@@ -91,6 +91,8 @@ class spSettings {
         'sp_file_edit_htaccess'=>(object) array('type'=>'file','value'=>'',
             'path'=>dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR.'.htaccess' ),
 
+        'sp_sitemaps_enabled'=>(object) array('type'=>'option','value'=>1,'possible'=>array(0,1),),
+
         'sp_file_robots_txt_enable'=>(object) array('type'=>'option','value'=>0,'possible'=>array(0,1),),
         'sp_file_robots_txt'=>(object) array( 'type'=>'file','value'=>'',
             'path'=>dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'sitemaps'.DIRECTORY_SEPARATOR.'robots.txt' ),
